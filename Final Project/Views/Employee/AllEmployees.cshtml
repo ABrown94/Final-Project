@@ -1,0 +1,49 @@
+﻿@model Final_Project.Models.EmployeeViewModel
+<h2>Staff</h2>
+<p>
+    @Html.ActionLink("Create Account For New Staff Member", "Register", "Account")
+</p>
+    <div class="col-md-6">
+        <table class="table table-hover">
+            <tr>
+                <th>
+                    <h3>@Html.DisplayNameFor(model => model.Teachers)</h3>
+                </th>
+            </tr>
+
+            @foreach (var item in Model.Teachers)
+            {
+                <tr onclick="window.location = '@Url.Action("EmployeeDetails", "Employee", new{ id = item.EmployeeId})'">
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Person.FirstName) @Html.DisplayFor(modelItem => item.Person.LastName)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Details", "EmployeeDetails", new { id = item.EmployeeId }) 
+                    </td>
+                </tr>
+            }
+        </table>
+    </div>
+    <div class="col-md-6">
+        <table class="table table-hover">
+            <tr>
+                <th>
+                    <h3>@Html.DisplayNameFor(model => model.Administrators)</h3>
+                </th>
+                <th></th>
+            </tr>
+
+            @foreach (var item in Model.Administrators)
+            {
+                <tr onclick="window.location = '@Url.Action("EmployeeDetails", "Employee", new{ id = item.EmployeeId})'">
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Person.FirstName) @Html.DisplayFor(modelItem => item.Person.LastName)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Details", "EmployeeDetails", new { id = item.EmployeeId })
+                    </td>
+                </tr>
+            }
+        </table>
+    </div>
+

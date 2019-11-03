@@ -1,0 +1,14 @@
+﻿@model IEnumerable<Final_Project.Models.Course>
+
+@{
+    ViewBag.Title = "AllCourse";
+}
+
+<h4 style="margin-left:10%">Select Courses</h4>
+
+
+@foreach (var item in Model)
+{
+    <input type="checkbox" style="margin-left:10%" name="selectedCourses" value="@item.CourseId" /> @Html.DisplayFor(modelItem => item.CourseName)<br />
+}
+

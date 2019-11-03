@@ -1,0 +1,16 @@
+﻿@model System.DateTime
+@{
+    string comment = "";
+    DateTime overdue = new DateTime(Model.Year, Model.Month, Model.Day);
+    if (DateTime.Today > overdue)
+    {
+        comment = "Past Due";
+        <span>Past Due!!!!!:   @Model.ToString("yyyy-MM-dd")</span>
+    }
+    else
+    {
+        <span>@Model.ToString("yyyy-MM-dd")</span>
+    }
+}
+
+

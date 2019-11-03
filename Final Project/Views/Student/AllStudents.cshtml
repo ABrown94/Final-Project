@@ -1,0 +1,39 @@
+﻿@model IEnumerable<Final_Project.Models.Person>
+
+@{
+    ViewBag.Title = "AllStudents";
+}
+
+<h2>Students</h2>
+
+<p>
+    @Html.ActionLink("Add New Student", "CreateNewStudent")
+    @*@Html.ActionLink("Create Student Course", "CreateNewStudentCourse", "Course")*@
+</p>
+<table class="table table-hover" data-link="row">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LastName)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+{
+        <tr onclick="window.location = '@Url.Action("StudentDetails", "Student", new{ id = item.PersonId})'">
+            <td>
+                @Html.DisplayFor(modelItem => item.FirstName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LastName)
+            </td>
+            <td>
+                @Html.ActionLink("Details", "StudentDetails", new { id = item.PersonId })
+            </td>
+        </tr>
+}
+
+</table>

@@ -1,0 +1,33 @@
+﻿@model IEnumerable<Final_Project.Models.Course_Schedule>
+
+
+
+<table class="table">
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.DayOfWeek)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.StartTime)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EndTime)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Classroom)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Course.CourseName)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.CourseScheduleId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.CourseScheduleId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.CourseScheduleId })
+        </td>
+    </tr>
+}
+
+</table>
+

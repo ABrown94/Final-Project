@@ -1,0 +1,38 @@
+﻿@model Final_Project.Models.Expens
+
+@{
+    ViewBag.Title = "PaymentReceipt";
+}
+
+<div>
+    <h4>Payment made to @Html.DisplayFor(model => model.Person.FirstName) @Html.DisplayFor(model => model.Person.LastName)</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Amount)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Amount)
+        </dd>
+        <dt>
+            Bonus:
+        </dt>
+
+        <dd>
+            @ViewBag.Bonus
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DueDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DueDate)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Back", "EmployeeDetails", new { id = Model.Person.PersonId})
+</p>

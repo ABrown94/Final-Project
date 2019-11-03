@@ -1,0 +1,135 @@
+﻿@model Final_Project.Models.UserViewModel
+
+@{
+    ViewBag.Title = "UserHomepage";
+}
+
+<div class="jumbotron">
+    <div class="row">
+        <div class="col-md-6">
+            <h2>Administrative Website</h2>
+            @{
+                if (DateTime.Now.Hour < 12)
+                {
+                    <p>Good Morning, @Html.DisplayFor(model => model.User.Person.FirstName)</p>
+                }
+                else if (DateTime.Now.Hour > 12 && DateTime.Now.Hour < 17)
+                {
+                    <p>Good Afternoon, @Html.DisplayFor(model => model.User.Person.FirstName)</p>
+                }
+                else
+                {
+                    <p>Good Evening, @Html.DisplayFor(model => model.User.Person.FirstName)</p>
+                }
+            }
+            <p class="lead" style="line-height:30px">@*Hello, @Html.DisplayFor(model => model.User.Person.FirstName) </p>*@
+            <p><a href="@Url.Action("CreateNewStudent", "Student")" class=" btn btn-primary btn-lg">New Student &raquo;</a></p>
+            <div>
+                <section class="main">
+                    <form class="search" method="post">
+                        @*onkeydown="if(event.keyCode == 13)window.location=this.value"*@
+                        <input list="names" id="searchBar" name="search" placeholder="Look up student..."><input type="button" onclick="window.location=getUrl()" value="Go">
+                        <datalist id="names" class="nameList">
+                            @{
+                                foreach (var s in ViewBag.Students)
+                                {
+                                    <option name="student" id=@Url.Action("StudentDetails", "Student", new{ id = s.PersonId}) value=@s.FirstName>
+                                        @s.FirstName @s.LastName
+                                    </option>
+                                }
+                            }
+                        </datalist>
+                    </form>
+                </section>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <h3>@Html.DisplayNameFor(model => model.Today)</h3>
+            @{
+                var reminders = Model.Today;
+                if (!reminders.Any())
+                {
+                    <p style="font-size:small">Nothing to show</p>
+                }
+                else
+                {
+                    foreach (var item in Model.Today)
+                    {
+                        <ul>
+                            <li style="font-size:small">
+                                @Html.DisplayFor(modelItem => item.Notes)<br />
+                                @Html.DisplayFor(modelItem => item.Person1.FirstName) @Html.DisplayFor(modelItem => item.Person1.LastName)|
+                                @Html.ActionLink("Go to", "StudentDetails", new { Controller = "Student", id = item.StudentId }) |
+                                @Html.ActionLink("Done", "ReminderComplete", new { id = item.ReminderId })
+                            </li>
+                        </ul>
+                    }
+                }
+            }
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+            <h3>@Html.DisplayNameFor(model => model.ThisWeek)</h3>
+            @{
+                var weekReminders = Model.ThisWeek;
+                if (!weekReminders.Any())
+                {
+                    <p style="font-size:small">Nothing to show</p>
+                }
+                else
+                {
+                    foreach (var item in Model.ThisWeek)
+                    {
+                        <ul>
+                            <li>
+                                @Html.DisplayFor(modelItem => item.Notes)<br />
+                                @Html.DisplayFor(modelItem => item.Person1.FirstName) @Html.DisplayFor(modelItem => item.Person1.LastName)<br />
+                                @Html.DisplayFor(modelItem => item.Date) |
+                                @Html.ActionLink("Go to", "StudentDetails", new { Controller = "Student", id = item.StudentId, reminderId = item.ReminderId }) |
+                                @Html.ActionLink("Done", "ReminderComplete", new { id = item.ReminderId })
+                            </li>
+                        </ul>
+                    }
+                }
+            }
+        </div>
+        <div class="col-md-4">
+            <h3>@Html.DisplayNameFor(model => model.BillsDue)</h3>
+            @{
+                var bills = Model.BillsDue;
+                if (!bills.Any())
+                {
+                    <p style="font-size:small">Nothing to show</p>
+                }
+                else
+                {
+                    foreach (var item in Model.BillsDue)
+                    {
+                        <ul>
+                            <li>
+                                @Html.DisplayFor(modelItem => item.Person.FirstName) @Html.DisplayFor(modelItem => item.Person.LastName)<br />
+                                @Html.DisplayFor(modelItem => item.Amount) NIS <br />
+                                Due on: @Html.DisplayFor(modelItem => item.DueDate) |
+                                @Html.ActionLink("Go To", "StudentDetails", new { Controller = "Student", id = item.StudentId })
+                            </li>
+                        </ul>
+                    }
+                }
+            }
+        </div>
+    </div>
+</div>
+
+
+
+<script type="text/javascript">
+    var getUrl = function () {
+        var val = document.getElementById('searchBar').value;
+        var text = $('#names').find('option[value="' + val + '"]').attr('id');
+        return text;
+        //document.GetElementById("searchBar").value;
+    }
+</script>
+
+

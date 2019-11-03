@@ -1,0 +1,45 @@
+﻿@model IEnumerable<Final_Project.Models.Student_Bill>
+
+@{
+    ViewBag.Title = "ConfirmBill";
+}
+<h3>Confirm bill for @Html.DisplayFor(model => model.First().Person.FirstName) @Html.DisplayFor(model => model.First().Person.LastName)</h3>
+<p>
+Course: @Html.DisplayFor(model => model.First().Course.CourseName)<br /> 
+Full Price: @Html.DisplayFor(model => model.First().Course.Course_Details.Price) NIS
+</p>
+
+<table class="table-condensed">
+    <tr style="color:grey">
+        <th>
+            Bill
+        </th>
+        <th>
+            Due Date
+        </th>
+        <th></th>
+    </tr>
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Amount) NIS
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DueDate)
+        </td>
+        @*<td> 
+            @Html.ActionLink("Confirm", "AddBonus", new { studentId = item.StudentId, courseId = item.CourseId })
+            @Html.ActionLink("Cancel", "DeleteBill", new { studentId = item.StudentId, courseId = item.CourseId }, new { onclick = "return confirm('Are you sure you want to cancel this enrollment?');" })                     
+        </td>*@
+      
+    </tr>   
+}
+</table>
+
+<div>
+    @Html.ActionLink("Confirm", "AddBonus", new { studentId = Model.First().StudentId, courseId = Model.First().CourseId }) |
+    @Html.ActionLink("Cancel", "DeleteBill", new { studentId = Model.First().StudentId, courseId = Model.First().CourseId }, new { onclick = "return confirm('Are you sure you want to cancel this enrollment?');" })
+</div>
+   
+
+

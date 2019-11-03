@@ -1,0 +1,51 @@
+﻿@model Final_Project.Models.Course_Detail
+
+@{
+    ViewBag.Title = "CourseDetails";
+}
+
+<h3>@Html.DisplayFor(model => model.Course.CourseName)
+    <span style="font-size:small">@Html.ActionLink("Edit", "EditCourse", new { id = Model.CourseId}) |</span>
+    <span style="font-size:small">@Html.ActionLink("Delete", "DeleteCourse", new { id = Model.CourseId }, new { onclick = "return confirm('Are you sure you want to delete this course?');" })</span> 
+</h3>
+
+<dl class="dl">
+
+    <dd>
+        <b>@Html.DisplayNameFor(model => model.StartDate):</b> @Html.DisplayFor(model => model.StartDate)
+    </dd>
+
+    <dd>
+        <b>@Html.DisplayNameFor(model => model.EndDate):</b>@Html.DisplayFor(model => model.EndDate)
+    </dd>
+
+    <dd>
+           <b>Teacher:</b> @Html.DisplayFor(model => model.Person.FirstName) @Html.DisplayFor(model => model.Person.LastName)
+    </dd>
+
+    <dd>
+        <b>@Html.DisplayNameFor(model => model.Price):</b> @Html.DisplayFor(model => model.Price) NIS
+    </dd>
+
+</dl>
+
+<p>
+
+    @{
+        var schedule = Model.Course.Course_Schedule;
+        if (!schedule.Any())
+        //if(Model.Course.Course_Schedule == null)
+        {           
+            @Html.Action("CreateCourseSchedule", "Course", new { id = Model.CourseId })    
+        }
+        else
+        { 
+            @Html.Action("ViewSchedule", "Course", new { id = Model.CourseId })          
+        }
+
+}   
+</p>
+<div>
+    @Html.ActionLink("Back to List", "AllCourses")
+</div>
+

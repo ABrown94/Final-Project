@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="733377a3de844f79ac97ef8c9db95b96" Name="Diagram1">
+        <EntityTypeShape EntityType="Model.Bonu" Width="1.5" PointX="3" PointY="6.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Course" Width="1.5" PointX="3.75" PointY="3" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Course_Detail" Width="1.5" PointX="6" PointY="10.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Course_Schedule" Width="1.5" PointX="6" PointY="2.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Employee" Width="1.5" PointX="3" PointY="12.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Expens" Width="1.5" PointX="3" PointY="15.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Person" Width="1.5" PointX="0.75" PointY="10.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Reminder" Width="1.5" PointX="3" PointY="18.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Student_Bill" Width="1.5" PointX="6" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Student_Course" Width="1.5" PointX="6" PointY="14" IsExpanded="true" />
+        <AssociationConnector Association="Model.FK__Bonus__EmployeeI__2A4B4B5E" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK__Course_De__Cours__1B0907CE" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK__Course_Sc__Cours__1ED998B2" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK__Student_B__Cours__22AA2996" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK__Student_C__Cours__45F365D3" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK__Course_De__Teach__1BFD2C07" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK__Employee__Employ__117F9D94" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK__Expenses__Employ__267ABA7A" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK__Reminders__Advis__52593CB8" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK__Reminders__Stude__2E1BDC42" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK__Student_B__Stude__21B6055D" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK__Student_C__Stude__182C9B23" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

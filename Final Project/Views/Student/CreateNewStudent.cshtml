@@ -1,0 +1,104 @@
+﻿@model Final_Project.Models.Person
+
+@{
+    ViewBag.Title = "CreateNewStudent";
+}
+
+<h3>Submit New Student</h3>
+
+@using (Html.BeginForm(new { id = "form" })) 
+{
+    @Html.AntiForgeryToken()
+<div class="form-horizontal">
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="form-group">
+        @Html.LabelFor(model => model.FirstName, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "form-control", @name = "firstName" } })
+            @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.LastName, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.LastName, new { htmlAttributes = new { @class = "form-control", @name = "lastName" } })
+            @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Phone, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Phone, new { htmlAttributes = new { @class = "form-control", @name = "phone" } })
+            @*<input type="text" pattern="(?:0?[0-9]|1[0-9]|2[0-3]):[0-5][0-9]" name="startTime" class="form-control" dirname="phone" />*@
+            @Html.ValidationMessageFor(model => model.Phone, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2", @name = "email" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-md-2 form-group">Notes</label>
+        <div class="col-md-10" style="padding-left:4%">
+            <input type="text" class="form-control" name="notes" id="note" />
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-md-2 form-group">Due on</label>
+        <div class="col-md-10" style="padding-left:4%">
+            @*<input type="text" pattern="[0-9]{4}-(0[1-9]|1[012])-(0[1-9]|1[0-9]|2[0-9]|3[01])" placeholder="yyyy-mm-dd" name="date" id="noteDate" class="form-control" />*@
+            <input type="date" class="form-control" name="date" id="noteDate">
+            <p class="text-danger" id="dateWarning"></p>
+        </div>
+    </div>
+    <br />
+    <div>
+        @Html.Action("SelectCourses", "Course", new { @name = "selectedCourses" })
+    </div>
+    <p>
+        @*<input type="hidden" name="StudentId" value="@ViewBag.StudentId" />*@
+    </p>
+
+    <br />
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Submit" class="btn btn-default" onclick="return validate();" />
+        </div>
+    </div>
+</div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+<script type="text/javascript">
+    var validate = (function () {
+        if (($("#note").val() != ("")) && ($("#noteDate").val() == (""))) {
+            $("#dateWarning").html("This is a required field");
+            return false;
+        }
+        else if (($("#note").val() != ("")) && (new Date($("#noteDate").val()) == "Invalid Date"))
+        {
+            $("#dateWarning").html("Please enter a valid date");
+            return false;
+        }
+
+        else {
+            $("#dateWarning").html("");
+            form.submit();
+        }
+    });
+
+</script>
+
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
